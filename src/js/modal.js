@@ -1,0 +1,59 @@
+const modal = document.getElementById("modal");
+const title = document.getElementById("modal-title");
+const input = document.getElementById("modal-input");
+const inputWrapper = document.getElementById("input-wrapper");
+const form = document.getElementById("modal-form");
+const cancelar = document.getElementById("cancelar");
+
+let onConfirm = null;
+
+export function abrirModal({
+  titulo,
+  usarInput = false,
+  placeholder = "",
+  valor = "",
+  confirmar
+}) {
+  title.textContent = titulo;
+  onConfirm = confirmar;
+
+  if (usarInput) {
+    inputWrapper.classList.remove("hidden");
+    input.placeholder = placeholder;
+    input.value = valor;
+    input.focus();
+  } else {
+    inputWrapper.classList.add("hidden");
+  }
+
+  modal.classList.remove("hidden");
+}
+
+function fecharModal() {
+  modal.classList.add("hidden");
+  form.reset();
+  onConfirm = null;
+}
+
+cancelar.onclick = fecharModal;
+
+form.onsubmit = (e) => {
+  e.preventDefault();
+
+  if (!inputWrapper.classList.contains("hidden")) {
+    const valor = input.value.trim();
+
+    if (!valor) {
+      input.classList.add("input-error");
+      input.focus();
+      return;
+    }
+    input.classList.remove("input-error");
+
+    onConfirm?.(valor);
+  } else {
+    onConfirm?.();
+  }
+
+  fecharModal();
+};
