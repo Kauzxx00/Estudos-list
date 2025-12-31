@@ -1,12 +1,23 @@
 export const MAX_HORAS = 10;
 
-const materiasDefault = {
-  materias: [
-    { nome: "Matemática", horas: 8, marcadas: 0 },
-    { nome: "Português", horas: 4, marcadas: 0 },
-    { nome: "Física", horas: 8, marcadas: 0 },
-    { nome: "Química", horas: 6, marcadas: 0 },
-    { nome: "Inglês", horas: 4, marcadas: 0 }
+const dbDefault = {
+  configuracoes: {
+    blocoMinutos: 60
+  },
+
+  dias: [
+    {
+      data: new Date().toISOString().slice(0, 10),
+      atividades: [
+        {
+          id: crypto.randomUUID(),
+          titulo: "Matemática",
+          descricao: "Revisão geral",
+          blocosPlanejados: 2,
+          blocosConcluidos: 0
+        }
+      ]
+    }
   ]
 };
 
@@ -14,7 +25,13 @@ let db = null;
 
 export function carregarDB() {
   const res = localStorage.getItem("ciclo-db");
-  db = JSON.parse(res) || materiasDefault;
+
+  try {
+    db = res ? JSON.parse(res) : dbDefault;
+  } catch {
+    db = dbDefault;
+  }
+
   return db;
 }
 
@@ -23,5 +40,8 @@ export function salvarDB() {
 }
 
 export function getDB() {
+  if (!db) {
+    carregarDB();
+  }
   return db;
 }

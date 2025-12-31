@@ -1,0 +1,149 @@
+.materia {
+  background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface));
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow:
+    var(--shadow-md),
+    var(--shadow-inset-lighter);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.materia:hover {
+  transform: scale(1.005);
+}
+
+.materia .header {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+}
+
+.materia .header::after {
+  content: "";
+  position: absolute;
+  left: -22px;
+  right: -22px;
+  bottom: 0;
+  height: 3px;
+  background: var(--divider);
+}
+
+.materia .header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-circle {
+  --size: 34px;
+  --thickness: 3px;
+
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #4ade80 calc(var(--progress) * 1%),
+      #e5e7eb00 0
+    );
+
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.progress-circle::before {
+  content: "";
+  width: calc(var(--size) - var(--thickness) * 2);
+  height: calc(var(--size) - var(--thickness) * 2);
+  background: var(--bg-surface);
+  border-radius: 50%;
+}
+
+.progress-circle span {
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.horas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.hora {
+  width: clamp(28px, 9vw, 36px);
+  height: clamp(28px, 9vw, 36px);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hora:hover {
+  background: var(--neutral-hover);
+}
+
+.hora.marcada {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--success);
+  border-color: var(--success-border);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+.controls button {
+  flex: 1;
+}
+
+button {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+button i {
+  font-size: 1.2rem;
+  display: flex
+}
+
+button:hover {
+  background: var(--neutral-hover);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

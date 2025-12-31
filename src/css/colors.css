@@ -1,0 +1,43 @@
+:root {
+  /* Base */
+  --bg-body: #12122c;
+  --text-primary: #e5e7eb;
+
+  /* Surfaces */
+  --bg-surface: #020617;
+  --bg-overlay: rgba(2, 6, 23, 0.75);
+
+  /* Borders */
+  --border-default: rgba(148, 163, 184, 0.25);
+  --border-soft: rgba(148, 163, 184, 0.15);
+  --border-input: rgba(148, 163, 184, 0.2);
+
+  /* Shadows */
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.1);
+  --shadow-inset-light: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-inset-lighter: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  --shadow-inset-minimal: inset 0 1px 0 rgba(255, 255, 255, 0.01);
+
+  /* Text */
+  --text-muted: #94a3b8;
+
+  /* Primary */
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-focus: rgba(99, 102, 241, 0.25);
+
+  /* Error */
+  --error: #ef4444;
+  --error-focus: rgba(239, 68, 68, 0.3);
+
+  /* Success */
+  --success: #22c55e;
+  --success-border: #16a34a;
+
+  /* Neutral */
+  --neutral-hover: #334155;
+  --neutral-soft: rgba(148, 163, 184, 0.08);
+  --divider: #3341553d;
+}

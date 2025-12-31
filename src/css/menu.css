@@ -1,0 +1,99 @@
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+
+  background: linear-gradient(180deg, var(--bg-surface), var(--bg-surface));
+
+  padding: 14px 20px;
+  border-radius: 12px;
+}
+
+nav .top-nav h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttons .refresh {
+  padding: 13px 14px;
+}
+
+
+.buttons .fi-br-refresh {
+  font-size: .9rem;
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100dvh - 88px);
+  padding: 0 15px;
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--bg-surface);
+  border-radius: 14px 14px 0 0;
+  box-shadow:
+    var(--shadow-md),
+    var(--shadow-inset-lighter);
+
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-header h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: stretch;
+}
+
+.menu-item {
+  all: unset;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.menu-item i {
+  font-size: 1.1rem;
+}
+
+.menu-item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.menu-item.active {
+  background: var(--primary);
+  color: white;
+}
+.menu-item.active:hover {
+  background: var(--primary-hover);
+}

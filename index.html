@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ciclo de Estudos</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet" href="src/css/colors.css">
+  <link rel="stylesheet" href="src/css/modal.css">
+  <link rel="stylesheet" href="src/css/activity.css">
+  <link rel="stylesheet" href="src/css/menu.css">
+  <link rel="stylesheet" href="src/css/style.css">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 
   <meta property="og:title" content="Ciclo de Estudos" />
@@ -12,22 +18,22 @@
   <meta property="og:url" content="https://ciclo-estudos.netlify.app" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Ciclo de Estudos" />
-
   <meta name="theme-color" content="#12122c">
 </head>
 <body>
 
   <div id="modal" class="modal hidden">
+
     <div class="modal-box">
       <h2 id="modal-title"></h2>
 
       <form id="modal-form">
         <div id="input-wrapper">
-          <input
-            id="modal-input"
-            type="text"
-            placeholder="Digite o nome"
-          />
+          <input id="modal-input" type="text" placeholder="Digite o nome" />
+
+          <div id="input-description">
+            <textarea id="modal-input-desc" placeholder="Digite a descrição"></textarea>
+          </div>
         </div>
 
         <div class="actions">
@@ -36,22 +42,55 @@
         </div>
       </form>
     </div>
+
   </div>
 
-  <nav>
+  <nav class="top-nav">
     <h1>Ciclo de Estudos</h1>
-    <div class="buttons">
-      <button type="button" class="refresh">
-        <i class="fi fi-br-refresh"></i>
-      </button>
-      <button type="button" class="addMateria">
-        <i class="fi fi-br-plus-small"></i>
-      </button>
-    </div>
+    <div id="date" class="date"></div>
   </nav>
 
-  <div id="ciclo"></div>
+  <div class="layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>Ciclo</h1>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="menu-item active">
+          <i class="fi fi-br-calendar"></i>
+          <span>Atividades Hoje</span>
+        </button>
+
+        <button class="menu-item">
+          <i class="fi fi-br-book"></i>
+          <span>Atividades Totais</span>
+        </button>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="activities">
+        <div class="top-bar">
+          <div class="day-summary" id="day-summary"></div>
+
+          <div class="buttons">
+            <button type="button" class="refresh" title="Resetar progresso do dia">
+              <i class="fi fi-br-refresh"></i>
+            </button>
+            <button type="button" class="addMateria" title="Adicionar atividade">
+              <i class="fi fi-br-plus-small"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="ciclo" class="activity-list"></div>
+      </div>
+    </main>
+
+  </div>
+
   <script type="module" src="src/js/script.js"></script>
-  
 </body>
 </html>

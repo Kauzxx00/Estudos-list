@@ -2,12 +2,20 @@ import { getDB, salvarDB, MAX_HORAS } from "./storage.js";
 import { abrirModal } from "./modal.js";
 import { render } from "./render.js";
 
-export function toggleHora(materiaIndex, horaIndex) {
-  const db = getDB();
-  const materia = db.materias[materiaIndex];
+function getDiaAtual(db) {
+  const hoje = new Date().toISOString().slice(0, 10);
+  return db.dias.find(d => d.data === hoje);
+}
 
-  materia.marcadas =
-    horaIndex + 1 === materia.marcadas ? horaIndex : horaIndex + 1;
+export function toggleHora(atividadeIndex, blocoIndex) {
+  const db = getDB();
+  const dia = getDiaAtual(db);
+  const atividade = dia.atividades[atividadeIndex];
+
+  atividade.blocosConcluidos =
+    blocoIndex + 1 === atividade.blocosConcluidos
+      ? blocoIndex
+      : blocoIndex + 1;
 
   salvarDB();
   render();
@@ -15,21 +23,27 @@ export function toggleHora(materiaIndex, horaIndex) {
 
 export function addHora(i) {
   const db = getDB();
-  if (db.materias[i].horas >= MAX_HORAS) return;
+  const dia = getDiaAtual(db);
+  const atividade = dia.atividades[i];
 
-  db.materias[i].horas++;
+  if (atividade.blocosPlanejados >= MAX_HORAS) return;
+
+  atividade.blocosPlanejados++;
   salvarDB();
   render();
 }
 
 export function remHora(i) {
   const db = getDB();
-  if (db.materias[i].horas <= 0) return;
+  const dia = getDiaAtual(db);
+  const atividade = dia.atividades[i];
 
-  db.materias[i].horas--;
-  db.materias[i].marcadas = Math.min(
-    db.materias[i].marcadas,
-    db.materias[i].horas
+  if (atividade.blocosPlanejados <= 0) return;
+
+  atividade.blocosPlanejados--;
+  atividade.blocosConcluidos = Math.min(
+    atividade.blocosConcluidos,
+    atividade.blocosPlanejados
   );
 
   salvarDB();
@@ -38,13 +52,23 @@ export function remHora(i) {
 
 export function addMateria() {
   abrirModal({
-    titulo: "Adicionar matéria",
+    titulo: "Adicionar atividade",
     usarInput: true,
-    placeholder: "Nome da matéria",
-    confirmar: (nome) => {
-      if (!nome) return;
+    placeholder: "Título da atividade",
+    confirmar: (titulo, descricao) => {
+      if (!titulo) return;
+
       const db = getDB();
-      db.materias.push({ nome, horas: 2, marcadas: 0 });
+      const dia = getDiaAtual(db);
+
+      dia.atividades.unshift({
+        id: crypto.randomUUID(),
+        titulo,
+        descricao,
+        blocosPlanejados: 2,
+        blocosConcluidos: 0
+      });
+
       salvarDB();
       render();
     }
@@ -53,10 +77,12 @@ export function addMateria() {
 
 export function remMateria(i) {
   const db = getDB();
+  const dia = getDiaAtual(db);
+
   abrirModal({
-    titulo: `Remover "${db.materias[i].nome}"?`,
+    titulo: `Remover "${dia.atividades[i].titulo}"?`,
     confirmar: () => {
-      db.materias.splice(i, 1);
+      dia.atividades.splice(i, 1);
       salvarDB();
       render();
     }
@@ -65,10 +91,12 @@ export function remMateria(i) {
 
 export function restart() {
   const db = getDB();
+  const dia = getDiaAtual(db);
+
   abrirModal({
-    titulo: "Resetar todas as matérias?",
+    titulo: "Resetar todas as atividades do dia?",
     confirmar: () => {
-      db.materias.forEach(m => m.marcadas = 0);
+      dia.atividades.forEach(a => a.blocosConcluidos = 0);
       salvarDB();
       render();
     }

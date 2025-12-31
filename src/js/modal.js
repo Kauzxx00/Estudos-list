@@ -1,6 +1,7 @@
 const modal = document.getElementById("modal");
 const title = document.getElementById("modal-title");
 const input = document.getElementById("modal-input");
+const inputDesc = document.getElementById("modal-input-desc");
 const inputWrapper = document.getElementById("input-wrapper");
 const form = document.getElementById("modal-form");
 const cancelar = document.getElementById("cancelar");
@@ -9,6 +10,7 @@ let onConfirm = null;
 
 export function abrirModal({
   titulo,
+  descricao = "",
   usarInput = false,
   placeholder = "",
   valor = "",
@@ -19,6 +21,10 @@ export function abrirModal({
 
   if (usarInput) {
     inputWrapper.classList.remove("hidden");
+    inputDesc.value = descricao;
+    inputDesc.placeholder = "Descrição da atividade (opcional)";
+    inputDesc.focus();
+
     input.placeholder = placeholder;
     input.value = valor;
     input.focus();
@@ -41,16 +47,17 @@ form.onsubmit = (e) => {
   e.preventDefault();
 
   if (!inputWrapper.classList.contains("hidden")) {
-    const valor = input.value.trim();
+    const title = input.value.trim();
+    const desc = inputDesc.value.trim();
 
-    if (!valor) {
+    if (!title) {
       input.classList.add("input-error");
       input.focus();
       return;
     }
     input.classList.remove("input-error");
 
-    onConfirm?.(valor);
+    onConfirm?.(title, desc);
   } else {
     onConfirm?.();
   }

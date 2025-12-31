@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-body);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: calc(100vh - 18px);
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+}
+
+.top-nav h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+
+#ciclo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 415px) {
+  body {
+    padding: 14px;
+  }
+
+  nav h1 {
+    font-size: .95rem;
+  }
+
+  .materia {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .materia .header::after {
+    left: -16px;
+    right: -16px;
+  }
+
+  .materia .header h2 {
+    font-size: 0.95rem;
+  }
+
+  .horas {
+    gap: 8px;
+  }
+  
+  nav .buttons .fi-br-refresh {
+    font-size: .7rem;
+  }
+  
+  nav .buttons .refresh {
+    padding: 10px;
+  }
+
+  button {
+    padding: 7px;
+  }
+
+  button i {
+    font-size: 1rem;
+  }
+}
