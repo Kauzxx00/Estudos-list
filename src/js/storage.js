@@ -7,7 +7,7 @@ const dbDefault = {
 
   dias: [
     {
-      data: new Date().toISOString().slice(0, 10),
+      data: new Date().toLocaleDateString('pt-BR', { year: 'numeric', day: 'numeric', month: 'numeric' }),
       atividades: [
         {
           id: crypto.randomUUID(),

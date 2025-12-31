@@ -13,7 +13,7 @@ const ciclo = document.getElementById("ciclo");
 const summaryEl = document.getElementById("day-summary");
 
 function getDiaAtual(db) {
-  const hoje = new Date().toISOString().slice(0, 10);
+  const hoje = new Date().toLocaleDateString('pt-BR', { year: 'numeric', day: 'numeric', month: 'numeric' });
   console.log(db.dias, hoje);
   return db.dias.find(d => d.data === hoje);
 }

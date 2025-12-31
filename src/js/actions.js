@@ -3,7 +3,7 @@ import { abrirModal } from "./modal.js";
 import { render } from "./render.js";
 
 function getDiaAtual(db) {
-  const hoje = new Date().toISOString().slice(0, 10);
+  const hoje = new Date().toLocaleDateString('pt-BR', { year: 'numeric', day: 'numeric', month: 'numeric' });
   return db.dias.find(d => d.data === hoje);
 }
 
